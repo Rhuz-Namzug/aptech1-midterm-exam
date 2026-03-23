@@ -3,8 +3,8 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:15px 40px;
-background:#4CAF50;
-color:white;
+background:#89bbf5;
+color:rgb(0, 0, 0);
 }
 
 .logo{

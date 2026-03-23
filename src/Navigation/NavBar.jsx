@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      <h2 className="logo">Student Registration</h2>
+      <h2 className="logo">Registration</h2>
 
       <div className="nav-links">
         <ul>

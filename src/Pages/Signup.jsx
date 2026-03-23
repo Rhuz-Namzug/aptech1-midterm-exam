@@ -20,7 +20,7 @@ function Signup() {
 
   const onSubmit = (data) => {
     console.log("Submitted Data:", data);
-    navigate("/profile/$(forData.username)");
+    navigate(`/Profile/${data.username}`);
   };
 
   return (

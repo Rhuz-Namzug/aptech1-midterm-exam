@@ -7,8 +7,6 @@ function Profile() {
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Profile Page</h1>
       <h2>Welcome, {username}!</h2>
-
-      <p>This is your dynamic profile page.</p>
     </div>
   );
 }
