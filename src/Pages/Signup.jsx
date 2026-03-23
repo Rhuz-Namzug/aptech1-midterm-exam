@@ -1,17 +1,33 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
 
-  // Event Handling: onChange
+  // Controlled Form State
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    email: ""
+  });
+
+  // Handle input changes
   const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
-  // Event Handling: onSubmit
+  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+
+    console.log(formData);
 
     navigate("/success");
   };
@@ -25,6 +41,7 @@ function Signup() {
           type="text"
           name="firstName"
           placeholder="First Name"
+          value={formData.firstName}
           onChange={handleChange}
         /><br />
 
@@ -32,13 +49,15 @@ function Signup() {
           type="text"
           name="lastName"
           placeholder="Last Name"
-          onChange={(e) => handleChange(e)} // inline arrow function
+          value={formData.lastName}
+          onChange={handleChange}
         /><br />
 
         <input
           type="text"
           name="username"
           placeholder="Username"
+          value={formData.username}
           onChange={handleChange}
         /><br />
 
@@ -46,6 +65,7 @@ function Signup() {
           type="password"
           name="password"
           placeholder="Password"
+          value={formData.password}
           onChange={handleChange}
         /><br />
 
@@ -53,6 +73,7 @@ function Signup() {
           type="email"
           name="email"
           placeholder="Email"
+          value={formData.email}
           onChange={handleChange}
         /><br />
 
