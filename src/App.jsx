@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/Home" element={<Home />} />
-        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Profile/:username" element={<Profile />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Success" element={<Success />} />
       </Routes>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "../styles/Signup.css";
+import "../Signup.css";
 
 function Signup() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Signup() {
 
   const onSubmit = (data) => {
     console.log("Submitted Data:", data);
-    navigate("/success");
+    navigate("/profile/$(forData.username)");
   };
 
   return (

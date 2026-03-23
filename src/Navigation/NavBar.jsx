@@ -8,10 +8,12 @@ function Navbar() {
       <h2 className="logo">Student Registration</h2>
 
       <div className="nav-links">
-        <Link to="/Home">Home</Link>
-        <Link to="/Signup">Signup</Link>
-        <Link to="/Success">Success</Link>
-        <Link to="/Profile">Profile</Link>
+        <ul>
+          <li><Link to="/Home">Home</Link></li>
+          <li><Link to="/Signup">Signup</Link></li>
+          <li><Link to="/Success">Success</Link></li>
+          <li><Link to="/Profile/sampleuser">Profile</Link></li>
+          </ul>
       </div>
 
     </nav>
