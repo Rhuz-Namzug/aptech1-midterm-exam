@@ -1,134 +1,109 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import "../styles/Signup.css";
 
 function Signup() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
-    email: ""
-  });
-
-  const [errors, setErrors] = useState({});
-
   const nameRegex = /^[A-Za-z]{2,}$/;
   const usernameRegex = /^[A-Za-z0-9._-]+$/;
-  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,16}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const validate = () => {
-    let newErrors = {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: "onChange" 
+  });
 
-    if (!nameRegex.test(formData.firstName)) {
-      newErrors.firstName = "First name must be letters only and at least 2 characters.";
-    }
-
-    if (!nameRegex.test(formData.lastName)) {
-      newErrors.lastName = "Last name must be letters only and at least 2 characters.";
-    }
-
-    if (!usernameRegex.test(formData.username)) {
-      newErrors.username = "Username must contain only letters, numbers, ., _, -";
-    }
-
-    if (!passwordRegex.test(formData.password)) {
-      newErrors.password = "Password must be 8-16 characters with AT LEAST 1 uppercase, 1 lowercase, 1 number, and 1 special character.";
-    }
-
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Invalid email format.";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-      console.log("Form is valid:", formData);
-      navigate("/success");
-    } else {
-      console.log("Validation errors");
-    }
+  const onSubmit = (data) => {
+    console.log("Submitted Data:", data);
+    navigate("/success");
   };
 
   return (
     <div className="signup-container">
-  <h2>Signup Form</h2>
+      <h2>Signup Form (React Hook Form)</h2>
 
-  <form onSubmit={handleSubmit}>
-    <input
-      type="text"
-      name="firstName"
-      placeholder="First Name"
-      value={formData.firstName}
-      onChange={handleChange}
-      className={errors.firstName ? "input-error" : ""}
-    />
-    <p className="error-text">{errors.firstName}</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="text"
+          placeholder="First Name"
+          {...register("firstName", {
+            required: "First name is required",
+            pattern: {
+              value: nameRegex,
+              message: "At least 2 letters only"
+            }
+          })}
+          className={errors.firstName ? "input-error" : ""}
+        />
+        <p className="error-text">{errors.firstName?.message}</p>
 
-    <input
-      type="text"
-      name="lastName"
-      placeholder="Last Name"
-      value={formData.lastName}
-      onChange={handleChange}
-      className={errors.lastName ? "input-error" : ""}
-    />
-    <p className="error-text">{errors.lastName}</p>
+        <input
+          type="text"
+          placeholder="Last Name"
+          {...register("lastName", {
+            required: "Last name is required",
+            pattern: {
+              value: nameRegex,
+              message: "At least 2 letters only"
+            }
+          })}
+          className={errors.lastName ? "input-error" : ""}
+        />
+        <p className="error-text">{errors.lastName?.message}</p>
 
-    <input
-      type="text"
-      name="username"
-      placeholder="Username"
-      value={formData.username}
-      onChange={handleChange}
-      className={errors.username ? "input-error" : ""}
-    />
-    <p className="error-text">{errors.username}</p>
+        <input
+          type="text"
+          placeholder="Username"
+          {...register("username", {
+            required: "Username is required",
+            pattern: {
+              value: usernameRegex,
+              message: "Invalid username"
+            }
+          })}
+          className={errors.username ? "input-error" : ""}
+        />
+        <p className="error-text">{errors.username?.message}</p>
 
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      value={formData.password}
-      onChange={handleChange}
-      className={errors.password ? "input-error" : ""}
-    />
-    <p className="error-text">{errors.password}</p>
+        <input
+          type="password"
+          placeholder="Password"
+          {...register("password", {
+            required: "Password is required",
+            pattern: {
+              value: passwordRegex,
+              message:
+                "8-16 characters with AT LEAST 1 uppercase, 1 lowercase, 1 number, and 1 special character"
+            }
+          })}
+          className={errors.password ? "input-error" : ""}
+        />
+        <p className="error-text">{errors.password?.message}</p>
 
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      value={formData.email}
-      onChange={handleChange}
-      className={errors.email ? "input-error" : ""}
-    />
-    <p className="error-text">{errors.email}</p>
+        <input
+          type="email"
+          placeholder="Email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: emailRegex,
+              message: "Invalid email"
+            }
+          })}
+          className={errors.email ? "input-error" : ""}
+        />
+        <p className="error-text">{errors.email?.message}</p>
 
-    <button type="submit" disabled={!isValid}>
-      Submit
-    </button>
-  </form>
-</div>
-
-
+        <button type="submit" disabled={!isValid}>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 
