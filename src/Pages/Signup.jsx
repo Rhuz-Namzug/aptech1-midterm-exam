@@ -68,58 +68,66 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h2>Signup Form</h2>
+    <div className="signup-container">
+  <h2>Signup Form</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        <p>{errors.firstName}</p>
+  <form onSubmit={handleSubmit}>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First Name"
+      value={formData.firstName}
+      onChange={handleChange}
+      className={errors.firstName ? "input-error" : ""}
+    />
+    <p className="error-text">{errors.firstName}</p>
 
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-        <p>{errors.lastName}</p>
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last Name"
+      value={formData.lastName}
+      onChange={handleChange}
+      className={errors.lastName ? "input-error" : ""}
+    />
+    <p className="error-text">{errors.lastName}</p>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <p>{errors.username}</p>
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      value={formData.username}
+      onChange={handleChange}
+      className={errors.username ? "input-error" : ""}
+    />
+    <p className="error-text">{errors.username}</p>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <p>{errors.password}</p>
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      value={formData.password}
+      onChange={handleChange}
+      className={errors.password ? "input-error" : ""}
+    />
+    <p className="error-text">{errors.password}</p>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <p>{errors.email}</p>
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      value={formData.email}
+      onChange={handleChange}
+      className={errors.email ? "input-error" : ""}
+    />
+    <p className="error-text">{errors.email}</p>
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <button type="submit" disabled={!isValid}>
+      Submit
+    </button>
+  </form>
+</div>
+
   );
 }
 
